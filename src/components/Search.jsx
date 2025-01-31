@@ -1,5 +1,6 @@
 import { BiSearch, BiCaretDown, BiCheck } from 'react-icons/bi'
 import { useState } from 'react'
+import PropTypes from 'prop-types'
 
 
 const DropDown = () => {
@@ -30,7 +31,7 @@ const DropDown = () => {
     )
 }
 
-const Search = () => {
+const Search = ({ query, onQueryChange }) => {
     const [toggleSort, setToggleSort] = useState(false)
 
     return (
@@ -42,7 +43,8 @@ const Search = () => {
                         <label htmlFor="query" className="sr-only" />
                     </div>
 
-                    <input type="text" name="query" id="query" value=""
+                    <input type="text" name="query" id="query" value={query}
+                        onChange={(event) => { onQueryChange(event.target.value) }}
                         className="pl-8 rounded-md focus:ring-indigo-500 focus:border-indigo-500 block w-full h-9 sm:text-sm border-2 border-black" placeholder="Search" />
 
 
@@ -62,6 +64,10 @@ const Search = () => {
             </div>
         </div>
     )
+}
+Search.propTypes = {
+    query: PropTypes.string,
+    onQueryChange: PropTypes.func.isRequired
 }
 
 export default Search

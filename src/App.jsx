@@ -8,6 +8,13 @@ import AppointmentInfo from './components/ApointmentInfo';
 const App = () => {
   const [Data, setData] = useState([]);
 
+  const [query, setQuery] = useState('');
+
+  const filteredAppointments = Data.filter(item =>
+    typeof item.petName === 'string' && item.petName.toLowerCase().includes(query.toLowerCase())
+  );
+
+
   const fetchData = useCallback(() => {
     fetch('/data.json')
       .then(response => response.json())
@@ -25,7 +32,9 @@ const App = () => {
     <>
       <div className="grid grid-cols-2 p-10 h-8 pb-10">
         <Header />
-        <Search />
+        <Search query={query}
+          onQueryChange={myQuery => setQuery(myQuery)}
+        />
       </div>
 
       <div className="grid grid-cols-1 p-10">
@@ -34,7 +43,7 @@ const App = () => {
 
       <div className="grid grid-cols-1 pt-4 p-10">
         <ul className="divide-y divide-gray-200">
-          {Data.map(data => (
+          {filteredAppointments.map(data => (
             <AppointmentInfo
               key={data.id}
               data={data}
