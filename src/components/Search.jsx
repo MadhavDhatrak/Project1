@@ -3,7 +3,8 @@ import { useState } from 'react'
 import PropTypes from 'prop-types'
 
 
-const DropDown = () => {
+const DropDown = ({ sortBy, onSortByChange, orderBy, onOrderByChange }) => {
+
 
 
     return (
@@ -11,27 +12,27 @@ const DropDown = () => {
             <div className="origin-top-right absolute right-0 mt-2 w-56
     rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
                 <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-                    <div
+                    <div onClick={() => onSortByChange('petName')}
                         className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 flex justify-between cursor-pointer"
-                        role="menuitem">Pet Name <BiCheck /></div>
-                    <div
+                        role="menuitem">Pet Na{(sortBy === "petName") && <BiCheck />}</div>
+                    <div onClick={() => onSortByChange('ownerName')}
                         className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 flex justify-between cursor-pointer"
-                        role="menuitem">Owner Name  <BiCheck /></div>
-                    <div
+                        role="menuitem">Owner Name {{(sortBy === "ownerName") && <BiCheck />}}</div>
+                    <div onClick={() => onSortByChange('Date')}
                         className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 flex justify-between cursor-pointer"
-                        role="menuitem">Date <BiCheck /></div>
-                    <div
+                        role="menuitem">Date{(sortBy === "petName") && <BiCheck />}</div>
+                    <div onClick={() => onSortByChange('asc')}
                         className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 flex justify-between cursor-pointer border-gray-1 border-t-2"
-                        role="menuitem">Asc <BiCheck /></div>
-                    <div
+                        role="menuitem">{(sortBy === "petName") && <BiCheck />}</div>
+                    <div onClick={() => onSortByChange('desc')}
                         className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 flex justify-between cursor-pointer"
-                        role="menuitem">Desc <BiCheck /></div>
+                        role="menuitem">Desc{(sortBy === "petName")}</div>
                 </div>
             </div></>
     )
 }
 
-const Search = ({ query, onQueryChange }) => {
+const Search = ({ query, onQueryChange, sortBy, onSortByChange, orderBy, onOrderByChange }) => {
     const [toggleSort, setToggleSort] = useState(false)
 
     return (
@@ -58,7 +59,12 @@ const Search = ({ query, onQueryChange }) => {
                         </div>
                     </div>
                     {
-                        toggleSort && <DropDown />
+                        toggleSort && <DropDown
+                            sortBy={sortBy}
+                            onSortByChange={mySort => onSortByChange(mySort)}
+                            orderBy={orderBy}
+                            onOrderByChange={myOrder => onOrderByChange(myOrder)}
+                        />
                     }
                 </div>
             </div>

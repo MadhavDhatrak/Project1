@@ -9,10 +9,18 @@ const App = () => {
   const [Data, setData] = useState([]);
 
   const [query, setQuery] = useState('');
+  let [sortBy, setSortBy] = useState('petName');
+  let [orderBy, setOrderBy] = useState('asc');
 
   const filteredAppointments = Data.filter(item =>
     typeof item.petName === 'string' && item.petName.toLowerCase().includes(query.toLowerCase())
-  );
+  ).sort((a, b) => {
+    let order = (orderBy === "asc") ? 1 : -1;
+    return (
+      a[sortBy].toLowerCase() < b[sortBy].toLowerCase() ? -1 * order : 1 * order
+    )
+
+  });
 
 
   const fetchData = useCallback(() => {
@@ -34,6 +42,10 @@ const App = () => {
         <Header />
         <Search query={query}
           onQueryChange={myQuery => setQuery(myQuery)}
+          orderBy={orderBy}
+          onOrderByChange={mySort => setOrderBy(mySort)}
+          sortBy={sortBy}
+          onSortByChange={mySort => setSortBy(mySort)}
         />
       </div>
 
