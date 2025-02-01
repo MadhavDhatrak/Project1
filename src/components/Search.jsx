@@ -17,7 +17,7 @@ const DropDown = ({ sortBy, onSortByChange, orderBy, onOrderByChange }) => {
                         role="menuitem">Pet Na{(sortBy === "petName") && <BiCheck />}</div>
                     <div onClick={() => onSortByChange('ownerName')}
                         className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 flex justify-between cursor-pointer"
-                        role="menuitem">Owner Name {{(sortBy === "ownerName") && <BiCheck />}}</div>
+                        role="menuitem">Owner Name {(sortBy === "ownerName") && <BiCheck />}</div>
                     <div onClick={() => onSortByChange('Date')}
                         className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 flex justify-between cursor-pointer"
                         role="menuitem">Date{(sortBy === "petName") && <BiCheck />}</div>
