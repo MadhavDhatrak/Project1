@@ -3,7 +3,7 @@ import { useState } from 'react'
 import PropTypes from 'prop-types'
 
 
-const DropDown = ({ sortBy, onSortByChange, orderBy, onOrderByChange }) => {
+const DropDown = ({ sortBy, onSortByChange }) => {
 
 
 
@@ -31,6 +31,11 @@ const DropDown = ({ sortBy, onSortByChange, orderBy, onOrderByChange }) => {
             </div></>
     )
 }
+
+DropDown.propTypes = {
+    sortBy: PropTypes.string.isRequired,
+    onSortByChange: PropTypes.func.isRequired
+};
 
 const Search = ({ query, onQueryChange, sortBy, onSortByChange, orderBy, onOrderByChange }) => {
     const [toggleSort, setToggleSort] = useState(false)
@@ -73,7 +78,11 @@ const Search = ({ query, onQueryChange, sortBy, onSortByChange, orderBy, onOrder
 }
 Search.propTypes = {
     query: PropTypes.string,
-    onQueryChange: PropTypes.func.isRequired
+    onQueryChange: PropTypes.func.isRequired,
+    sortBy: PropTypes.string.isRequired,
+    onSortByChange: PropTypes.func.isRequired,
+    orderBy: PropTypes.string.isRequired,
+    onOrderByChange: PropTypes.func.isRequired
 }
 
 export default Search
